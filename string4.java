@@ -5,8 +5,9 @@ class string4
 	{	
 		String s1="hello";
 		String s2="hi";
-	
-		
+		String s6 = s1.substring(3);
+		String s7=s6.concat(s2); 
+		System.out.println(s7);
 	
 		String s3="aaa";
 		String s4="bbb";
