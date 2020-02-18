@@ -1,10 +1,13 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayIndexDemo {
 
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "resource" })
 	public static void main(String[] args) {
 		int sum = 0;
+		int flag=0;
+		
 		Scanner sc=new Scanner(System.in);
 		
 		System.out.println("Enter the size :");
@@ -19,6 +22,8 @@ public class ArrayIndexDemo {
 
 		
 		}
+		
+	
 		Scanner n1=new Scanner(System.in);
 		
 		System.out.println("Enter the number to be search :");
@@ -43,10 +48,8 @@ public class ArrayIndexDemo {
 			
 		}
 			System.out.println("sum is :"+sum);
-	}
-	
-	
+			
+
 		
 	}
-
-
+}
