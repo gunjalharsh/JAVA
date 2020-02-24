@@ -1,0 +1,272 @@
+  
+<form action="Redirect1">
+<ol>
+<li><input type="radio" name="mail" 
+value="http://www.ibm.com">IBM
+<li><input type="radio" name="mail" 
+value="http://www.google.co.in">Google
+<li><input type="radio" name="mail" 
+value="http://www.oracle.com">Oracle
+<li><input type="radio" name="mail" 
+value="http://www.Microsoft.com">Microsoft
+<li><input type="radio" name="mail" 
+value="unknown">Unknown
+</ol>
+<input type=submit value="SignIn">
+</form>
+======================================================================
+package com.test;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Redirect1
+ */
+@WebServlet("/Redirect1")
+public class Redirect1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Redirect1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String mail=request.getParameter("mail");
+    	if (mail.equals("unknown")) 
+    	{
+	//response.sendError(404,"Website Not Available");
+//response.sendError(response.SC_NOT_FOUND,	"Pls My Website Not Available");
+  		response.sendError(404,"CustomError.html");
+   	
+    	}
+    	else
+    	{
+    	response.sendRedirect(mail);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+===============================================================================
+web.xml
+ <error-page>
+    <error-code>404</error-code>
+    <location>/CustomError.html</location>
+  </error-page>
+=================================================================
+CustomError.html
+<h1>Please contact the network admin!!
+Reachable within 24 hours!!!
+</h1>
+==============================================================
+Jdbc1.java
+package com.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Jdbc1
+ */
+@WebServlet("/Jdbc1")
+public class Jdbc1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Jdbc1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		 PrintWriter pw = response.getWriter();
+		 pw.println("<h1 align=center>Viewing "
+		    		+ "the Records</h1>");
+		  pw.println("<hr color=red>");
+		  pw.println("<table border=6 bgcolor=pink "
+		  		+ "align=center bordercolor=red>"
+		  		+ "<tr><th>Eno</th><th>EmpName</th>"
+		  		+ "<th>Salary</th></tr>");
+		  try
+	 	  {
+	 		  Class.forName("com.mysql.jdbc.Driver");
+	 Connection con=DriverManager.getConnection
+	("jdbc:mysql://localhost:3306/test","root","");
+	 	     Statement s = con.createStatement();
+	 ResultSet rs=s.executeQuery("select * from emp1");
+	   while(rs.next())
+ 	    {
+ 	    pw.println("<tr>");
+ 	    pw.println("<td>"+rs.getString(1));
+ 	    pw.println("<td>"+rs.getString("name"));
+ 	    pw.println("<td>"+rs.getString(3)); 	  
+ 	    pw.println("</tr>"); 	 	
+ 	    }
+	  pw.println("</table>");
+ 	    rs.close();
+ 	    s.close();
+ 	    con.close(); 	 	 
+
+	 	  }
+		     catch(Exception e)
+		  {
+	 	 	    pw.println(e);
+		  }
+		}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+========================================================
+<form action="Jdbc2" method="post">
+Eno:<input type="text" name="e1"><br>
+Name:<input type="text" name="n1"><br>
+Salary:<input type="text" name="s1"><br>
+<input type="submit" value="SignIn">
+<input type="reset" value="Clear">
+</form>
+=================================================================
+package com.test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Jdbc2
+ */
+@WebServlet("/Jdbc2")
+public class Jdbc2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Jdbc2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter pw = response.getWriter();
+        Connection con;
+        try
+        {
+        String e1 = request.getParameter("e1");
+        int eno1=Integer.parseInt(e1);
+        String n1 = request.getParameter("n1");
+        String s1 = request.getParameter("s1");
+        int sal=Integer.parseInt(s1);        
+        pw.println("<body bgcolor=pink><h1>Value "
+    + "passed to emp table: " +e1 + " "+n1 + " "+s1);
+        Class.forName("com.mysql.jdbc.Driver");
+        con=DriverManager.getConnection
+   ("jdbc:mysql://localhost:3306/test","root","");
+  PreparedStatement pst =  con.prepareStatement
+("insert into emp1(eno1,name,salary) values(?,?,?)");
+        pst.setInt(1,eno1);
+        pst.setString(2,n1);
+        pst.setInt(3,sal);        
+        int i = pst.executeUpdate();
+        if(i!=0)
+        {
+         pw.println("<br><h1>Record has been "
+         		+ "inserted");
+        }
+        else
+        {
+         pw.println("Failed to insert the data");
+        }
+        //display
+        pw.println("<table border=6 bgcolor=pink "
+       + "align=center bordercolor=red><tr><th>Eno</th>"
+       + "<th>EmpName</th><th>Salary</th></tr>");
+       ResultSet rs=pst.executeQuery("select * from emp1");
+       while(rs.next())
+        {
+        pw.println("<tr>");
+        pw.println("<td>"+rs.getString(1));
+        pw.println("<td>"+rs.getString(2));
+        pw.println("<td>"+rs.getString(3)); 	   
+        pw.println("</tr>");
+        }          
+
+
+        }
+        catch(Exception e)
+        {
+            pw.println(e);
+        }
+
+        }
+
+}
+=============================================================================================
+
+ Editable Link  Share Link
+Words: 565 | Chars: 7871 | Views: 0
+Last Updated: 1 Minute ago
+Privacy  Terms  Contact Us  About Us
+
