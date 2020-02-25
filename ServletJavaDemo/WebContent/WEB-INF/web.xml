@@ -10,23 +10,81 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>ServletDemo2</servlet-name>
+    <servlet-class>ServletDemo2</servlet-class>
+    <init-param>
+      <param-name>Company</param-name>
+      <param-value>ABC</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Training</param-name>
+      <param-value>Chennai</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Venue</param-name>
+      <param-value>BLT</param-value>
+    </init-param>
+  </servlet>
+  <context-param>
+    <param-name>Company</param-name>
+    <param-value>ABC</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Training</param-name>
+    <param-value>Chennai</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Venue</param-name>
+    <param-value>BLT</param-value>
+  </context-param>
+  <servlet>
     <description></description>
-    <display-name>Username</display-name>
-    <servlet-name>Username</servlet-name>
-    <servlet-class>com.Servlet.UserName.Username</servlet-class>
+    <display-name>SelectDemo</display-name>
+    <servlet-name>SelectDemo</servlet-name>
+    <servlet-class>SelectDemo</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Username</servlet-name>
-    <url-pattern>/Username</url-pattern>
+    <servlet-name>SelectDemo</servlet-name>
+    <url-pattern>/SelectDemo</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UserName</display-name>
-    <servlet-name>UserName</servlet-name>
-    <servlet-class>UserName</servlet-class>
+    <display-name>ConfigInit1</display-name>
+    <servlet-name>ConfigInit1</servlet-name>
+    <servlet-class>ConfigInit1</servlet-class>
+    <init-param>
+      <description></description>
+      <param-name>Company</param-name>
+      <param-value>CTS</param-value>
+    </init-param>
+    <init-param>
+      <description></description>
+      <param-name>Venue</param-name>
+      <param-value>Chennai</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserName</servlet-name>
-    <url-pattern>/UserName</url-pattern>
+    <servlet-name>ConfigInit1</servlet-name>
+    <url-pattern>/ConfigInit1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConfigInit8</display-name>
+    <servlet-name>ConfigInit8</servlet-name>
+    <servlet-class>ConfigInit8</servlet-class>
+    <init-param>
+      <description></description>
+      <param-name>Company</param-name>
+      <param-value>CTS</param-value>
+    </init-param>
+    <init-param>
+      <description></description>
+      <param-name>Venue</param-name>
+      <param-value>Chennai</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfigInit8</servlet-name>
+    <url-pattern>/ConfigInit8</url-pattern>
   </servlet-mapping>
 </web-app>
